@@ -19,7 +19,7 @@ import java.util.List;
 public class MuzixController {
     @Autowired
     MuzixService muzixService;
-
+    @Autowired
     public MuzixService getMuzixService()
     {
         return muzixService;
