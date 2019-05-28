@@ -12,13 +12,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(TrackNotFoundException.class)
     public ResponseEntity<?> handleTrackNotFoundException(TrackNotFoundException ex)
     {
-        return new ResponseEntity<>("Track Not Found...",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Track Not Found.",HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(TrackAlreadyExistException.class)
     public ResponseEntity<?> handleTrackExistsException(TrackAlreadyExistException ex)
     {
-        return new ResponseEntity<>("Track Already Exists",HttpStatus.ALREADY_REPORTED);
+        return new ResponseEntity<>("Track Already Exists.",HttpStatus.ALREADY_REPORTED);
     }
 
 }
