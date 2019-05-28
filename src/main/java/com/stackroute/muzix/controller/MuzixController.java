@@ -107,13 +107,11 @@ public class MuzixController {
         }
 
     }
-    //    @RequestMapping(value = "user/search/{name}", method=RequestMethod.GET)
-//    @ResponseBody
+
     @GetMapping("user/search/{trackName}")
     public ResponseEntity searchByName(@PathVariable  String trackName)throws  TrackNotFoundException
     {   ResponseEntity responseEntity=null;
         try {
-            //List<Muzix> muzixList = muzixService;
             return new ResponseEntity (muzixService.searchByName(trackName), HttpStatus.OK);
         }
         catch (TrackNotFoundException e)

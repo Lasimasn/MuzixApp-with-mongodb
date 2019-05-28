@@ -56,7 +56,6 @@ public class MuzixServiceImpl implements MuzixService {
             throw new TrackNotFoundException("Track not found");
         }
         return (Muzix) muzixRepository;
-        //return muzixList;
     }
 
     @Override
@@ -70,7 +69,6 @@ public class MuzixServiceImpl implements MuzixService {
         if(muzixRepository.existsById(trackId)) {
 
             muzixRepository.deleteById(trackId);
-            //muzixRepository.findAll();
         }
         else
         {

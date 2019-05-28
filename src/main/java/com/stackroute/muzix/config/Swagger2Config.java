@@ -10,17 +10,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-//@PropertySource(value="resources/application.properties")
 @EnableSwagger2
 //@Component
 public class Swagger2Config {
-//    @Autowired
-//    Environment ev;
-//    @Bean
-//    public void execute()
-//    {
-//        String attr=this.ev.getProperty("ds.type");
-//    }
 
     @Bean
     public Docket api() {

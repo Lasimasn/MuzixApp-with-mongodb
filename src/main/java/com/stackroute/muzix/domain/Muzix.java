@@ -20,11 +20,11 @@ import java.util.Collection;
 public class Muzix {
 
     @Id
-    //@Value("${trackId:7}")
+
     private int trackId;
-    //@Value("${trackName:polio}")
+
     private String trackName;
-    //@Value("${com}")
+
     private String comments;
 
 }
