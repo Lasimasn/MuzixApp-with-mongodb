@@ -12,9 +12,9 @@ public interface MuzixService {
     public Muzix addMuzix(Muzix muzix)throws TrackAlreadyExistException;
 
     public List<Muzix> displayAll() throws TrackNotFoundException;
-     public Muzix updateList(Muzix muzix) throws TrackNotFoundException;
+    public Muzix updateList(Muzix muzix) throws TrackNotFoundException;
     public List<Muzix> remove(int trackId)throws  TrackNotFoundException;
-   public Muzix searchByName(String trackName) throws  TrackNotFoundException;
-   public void seedData(Muzix muzix);
+    public Muzix searchByName(String trackName) throws  TrackNotFoundException;
+    public void seedData(Muzix muzix);
 
 }

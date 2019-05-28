@@ -14,14 +14,13 @@ import java.util.List;
 public class MuzixServiceImpl implements MuzixService {
     @Autowired
     MuzixRepository muzixRepository;
-
-    @Autowired
     public MuzixServiceImpl(MuzixRepository muzixRepository)
     {
         this.muzixRepository=muzixRepository;
     }
     public MuzixServiceImpl() {}
     @Override
+    //add tracks to the app
     public Muzix addMuzix(Muzix muzix)throws TrackAlreadyExistException
     {
         if(muzixRepository.existsById(muzix.getTrackId())) {
@@ -29,13 +28,17 @@ public class MuzixServiceImpl implements MuzixService {
         } else
             return muzixRepository.save(muzix);
     }
-
+    //display all track in the app
     @Override
-    public List<Muzix> displayAll()
+    public List<Muzix> displayAll() throws TrackNotFoundException
     {
+        if(muzixRepository==null)
+        {
+            throw new TrackNotFoundException("No tracks to display");
+        }
         return muzixRepository.findAll();
     }
-
+    //update an existing track
     @Override
     public Muzix updateList(Muzix muzix) throws TrackNotFoundException {
 
@@ -46,10 +49,9 @@ public class MuzixServiceImpl implements MuzixService {
         }
         return muzix1;
     }
-
+    //find a track by Name
     @Override
     public Muzix searchByName(String trackName) throws TrackNotFoundException{
-        //if(muzixRepository.exists(trackName))
         muzixRepository.searchByName(trackName);
         if(trackName==null)
         {
@@ -57,13 +59,7 @@ public class MuzixServiceImpl implements MuzixService {
         }
         return (Muzix) muzixRepository;
     }
-
-    @Override
-    public void seedData(Muzix muzix) {
-        if(!muzixRepository.existsById(muzix.getTrackId()))
-            muzixRepository.save(muzix);
-    }
-
+    //Delete a track by Id
     @Override
     public List<Muzix> remove(int trackId) throws TrackNotFoundException{
         if(muzixRepository.existsById(trackId)) {
@@ -77,11 +73,11 @@ public class MuzixServiceImpl implements MuzixService {
         return muzixRepository.findAll();
 
     }
-
-
-
-
-
-
+    //Add tracks
+    @Override
+    public void seedData(Muzix muzix) {
+        if(!muzixRepository.existsById(muzix.getTrackId()))
+            muzixRepository.save(muzix);
+    }
 
 }

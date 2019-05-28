@@ -102,7 +102,7 @@ public class MuzixServiceTest {
     }
 
     @Test
-    public void getAllUser(){
+    public void getAllUser() throws TrackNotFoundException{
 
         muzixRepository.save(muzix);
         //stubbing the mock to return specific data

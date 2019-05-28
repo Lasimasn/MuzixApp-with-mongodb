@@ -58,7 +58,7 @@ import static org.mockito.Mockito.when;
         @Test
         public void saveMuzix() throws Exception {
             when(muzixService.addMuzix(any())).thenReturn(muzix);
-            mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user/add")
+            mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
                     .andExpect(MockMvcResultMatchers.status().isCreated())
                     .andDo(MockMvcResultHandlers.print());
@@ -68,7 +68,7 @@ import static org.mockito.Mockito.when;
         @Test
         public void saveMuzixFailure() throws Exception {
             when(muzixService.addMuzix(any())).thenThrow(TrackAlreadyExistException.class);
-            mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user/add")
+            mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
                     .andExpect(MockMvcResultMatchers.status().isConflict())
                     .andDo(MockMvcResultHandlers.print());
@@ -77,9 +77,9 @@ import static org.mockito.Mockito.when;
         @Test
         public void updateMuzix() throws Exception {
             when(muzixService.updateList(any())).thenReturn(muzix);
-            mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/user/update")
+            mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isCreated())
+                    .andExpect(MockMvcResultMatchers.status().isOk())
                     .andDo(MockMvcResultHandlers.print());
 
 
@@ -87,9 +87,9 @@ import static org.mockito.Mockito.when;
         @Test
         public void updateMuzixFailure() throws Exception {
             when(muzixService.updateList(any())).thenThrow(TrackNotFoundException.class);
-            mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/user/update")
+            mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isConflict())
+                    .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                     .andDo(MockMvcResultHandlers.print());
         }
 
@@ -98,9 +98,9 @@ import static org.mockito.Mockito.when;
             List <Muzix> muzixList=muzixService.remove(muzix.getTrackId());
             when(muzixService.remove(muzix.getTrackId())).thenReturn((muzixList));
 
-            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user/remove/{trackId}",11)
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/music/{trackId}",11)
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isCreated())
+                    .andExpect(MockMvcResultMatchers.status().isOk())
                     .andDo(MockMvcResultHandlers.print());
 
 
@@ -108,9 +108,9 @@ import static org.mockito.Mockito.when;
         @Test
         public void deleteMuzixFailure() throws Exception {
             when(muzixService.remove(anyInt())).thenThrow(TrackNotFoundException.class);
-            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user/remove/{trackId}",11)
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/music/{trackId}",11)
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isConflict())
+                    .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                     .andDo(MockMvcResultHandlers.print());
         }
 
@@ -118,7 +118,7 @@ import static org.mockito.Mockito.when;
         public void searchMuzix() throws Exception {
             when(muzixService.searchByName(anyString())).thenReturn(muzix);
 
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/search/{trackName}","Diamonds")
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/music/{trackName}","Diamonds")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
                     .andExpect(MockMvcResultMatchers.status().isOk())
                     .andDo(MockMvcResultHandlers.print());
@@ -128,7 +128,7 @@ import static org.mockito.Mockito.when;
         @Test
         public void searchMuzixFailure() throws Exception {
             when(muzixService.searchByName(anyString())).thenThrow(TrackNotFoundException.class);
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/search/{trackName}","Diamonds")
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/music/{trackName}","Diamonds")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
                     .andExpect(MockMvcResultMatchers.status().isConflict())
                     .andDo(MockMvcResultHandlers.print());
@@ -136,9 +136,18 @@ import static org.mockito.Mockito.when;
         @Test
         public void getAllMuzix() throws Exception {
             when(muzixService.displayAll()).thenReturn(list);
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/display")
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
                     .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andDo(MockMvcResultHandlers.print());
+
+        }
+        @Test
+        public void getAllMuzixFailure() throws Exception {
+            when(muzixService.displayAll()).thenThrow(TrackNotFoundException.class);
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/music")
+                    .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
+                    .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                     .andDo(MockMvcResultHandlers.print());
 
         }
