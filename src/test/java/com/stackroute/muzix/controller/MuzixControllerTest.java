@@ -89,7 +89,7 @@ import static org.mockito.Mockito.when;
             when(muzixService.updateList(any())).thenThrow(TrackNotFoundException.class);
             mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
+                    .andExpect(MockMvcResultMatchers.status().isAlreadyReported())
                     .andDo(MockMvcResultHandlers.print());
         }
 
@@ -147,7 +147,7 @@ import static org.mockito.Mockito.when;
             when(muzixService.displayAll()).thenThrow(TrackNotFoundException.class);
             mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/music")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(muzix)))
-                    .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
+                    .andExpect(MockMvcResultMatchers.status().isNotFound())
                     .andDo(MockMvcResultHandlers.print());
 
         }

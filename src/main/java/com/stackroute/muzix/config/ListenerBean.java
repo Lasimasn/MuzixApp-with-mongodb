@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:application.properties")
-
+//implementing ContextRefreshedEvent
 public class ListenerBean implements ApplicationListener<ContextRefreshedEvent>
 {
         private MuzixServiceImpl muzixService;
@@ -30,9 +30,12 @@ public class ListenerBean implements ApplicationListener<ContextRefreshedEvent>
         public void onApplicationEvent(ContextRefreshedEvent event) {
             System.out.println("Context refreshed event fired:");
             System.out.println(event);
+            //Initialising values using constructor
             //Muzix muzix=new Muzix(1,"Jai ho","Hindi");
             //Muzix muzix1=new Muzix(2,"Harry","English");
 
+
+            //Adding tracks using @PropertySource annotation and environment
                 muzix.setTrackId(Integer.parseInt(env.getProperty("trackId1")));
                 muzix.setTrackName(env.getProperty("trackName1"));
                 muzix.setComments(env.getProperty("comments1"));

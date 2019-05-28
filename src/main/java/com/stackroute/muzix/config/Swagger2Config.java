@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 //@Component
 public class Swagger2Config {
-
+//Initializing bean
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()

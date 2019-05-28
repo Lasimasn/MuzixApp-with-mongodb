@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-
 @Document(collection = "Muzix")
 @Data
 @AllArgsConstructor

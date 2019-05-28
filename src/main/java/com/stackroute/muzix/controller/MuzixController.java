@@ -59,12 +59,12 @@ public class MuzixController {
         catch(TrackNotFoundException e)
         {
             e.getMessage();
-            responseEntity=new ResponseEntity(e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+            responseEntity=new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
         catch (Exception e)
         {
             e.getMessage();
-            responseEntity=new ResponseEntity(e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+            responseEntity=new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
 
         }
         return responseEntity;
@@ -78,12 +78,12 @@ public class MuzixController {
         }
         catch (TrackNotFoundException ex)
         {
-            return new ResponseEntity(ex.getMessage(),HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity(ex.getMessage(),HttpStatus.ALREADY_REPORTED);
             //throw ex;
         }
         catch (Exception e)
         {
-            return new ResponseEntity(e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity(e.getMessage(),HttpStatus.ALREADY_REPORTED);
         }
     }
     //Delete a track by Id
